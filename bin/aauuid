@@ -14,11 +14,9 @@
 ## IN THE SOFTWARE.
 ##
 PROGRAM_NAME="AAuuid"
-PROGRAM_VERSION="0.1"
-## Replace the > in the CONSOLE_THINGY
-## with your own string like ~$ or ~#
-## or whatever need. Leave a space for
-## better esthetics in the console.
+PROGRAM_VERSION="0.2"
+### Changeset
+### 0.1-0.2 Removed -n option
 CONSOLE_THINGY="> "
 aauuid(){
 	case "$1" in
@@ -31,9 +29,13 @@ $PROGRAM_NAME
 
 usage:
 	aauuid				Generates a pseudo-uuid
-	auuid -n x			Generates x number of pseudo-uuids
 	aauuid --version 		Shows aauuid version.
 	aauuid --help 			Shows this screen.
+
+
+This program is being launched from:
+	$0
+
 EOF
 	;;
 	*)
@@ -41,20 +43,7 @@ EOF
 	;;
 	esac
 }
-gen_aauuid(){
-	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 32 | head -n 1 | sed -e "s/\(........\)\(....\)\(....\)\(....\)\(............\)/\1-\2-\3-\4-\5/"
-}
 run(){
-	case "$1" in
-		-n)
-			loops="$2"
-		;;
-		*)
-			loops="1"
-		;;
-	esac
-	for i in "$(seq 1 $loops)" ; do
-		gen_aauuid
-	done
+	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 32 | head -n 1 | sed -e 's/\(........\)\(....\)\(....\)\(....\)\(............\)/\1-\2-\3-\4-\5/'
 }
 aauuid "$@"
