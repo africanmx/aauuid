@@ -13,6 +13,10 @@
 ## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS    ##
 ## IN THE SOFTWARE.
 ##
+
+## Warning: This implementation is hardcoded as you can see at the code inside the "run" function. It is hardcoded for the namespace "4".
+
+
 PROGRAM_NAME="AAuuid"
 PROGRAM_VERSION="0.2"
 ### Changeset
@@ -44,6 +48,6 @@ EOF
 	esac
 }
 run(){
-	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 32 | head -n 1 | sed -e 's/\(........\)\(....\)\(....\)\(....\)\(............\)/\1-\2-\3-\4-\5/'
+	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 31 | head -n 1 | sed -e 's/\(........\)\(....\)\(...\)\(....\)\(............\)/\1-\2-4\3-\4-\5/'
 }
 aauuid "$@"
