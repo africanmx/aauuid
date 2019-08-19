@@ -48,7 +48,7 @@ EOF
 	esac
 }
 run(){
-        test -f /proc/sys/kernel/randomness/uuid && cat /proc/sys/kernel/random/uuid
+        test -f /proc/sys/kernel/random/uuid && cat /proc/sys/kernel/random/uuid
 	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 31 | head -n 1 | sed -e 's/\(........\)\(....\)\(...\)\(....\)\(............\)/\1-\2-4\3-\4-\5/'
 }
 aauuid "$@"
