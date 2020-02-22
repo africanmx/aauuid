@@ -49,6 +49,6 @@ EOF
 }
 run(){
         test -f /proc/sys/kernel/random/uuid && cat /proc/sys/kernel/random/uuid && return
-	< /dev/urandom tr -dc _0-9-a-f | head -c${1:-31} | sed -e 's/\(........\)\(....\)\(...\)\(....\)\(............\)/\1-\2-4\3-\4-\5/'; echo;
+	cat /dev/urandom | tr -dc '0-9a-f' | fold -w 31 | head -n 1 | sed -e 's/\(........\)\(....\)\(...\)\(....\)\(............\)/\1-\2-4\3-\4-\5/'
 }
 aauuid "$@"
